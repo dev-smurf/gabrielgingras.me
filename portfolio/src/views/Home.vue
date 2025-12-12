@@ -93,6 +93,7 @@ const today = new Date().toLocaleDateString('fr-CA', {
                   Fondateur d'une marque de vêtements. Design, production locale au Québec, marketing, e-commerce. Des pièces uniques qui sortent des codes traditionnels.
                 </p>
                 <a href="https://instagram.com/backdoor.project" target="_blank" class="text-[10px] md:text-xs opacity-60 hover:opacity-100 transition font-medium">→ Instagram</a>
+                <a href="https://backdoorproject.com" target="_blank" class="block text-[10px] md:text-xs opacity-60 hover:opacity-100 transition font-medium mt-1">→ Site</a>
               </article>
 
             </div>
