@@ -128,7 +128,6 @@ const today = new Date().toLocaleDateString('fr-CA', {
                   Réseau social pour développeurs. Projet avec Antoine Boudreau. Auth, publications Markdown, profils.
                 </p>
                 <p class="text-[10px] md:text-xs opacity-50 font-mono mb-2">django · tailwind · sass</p>
-                <a href="https://antboudreau.pythonanywhere.com/" target="_blank" class="text-[10px] md:text-xs opacity-60 hover:opacity-100 transition font-medium">→ Site</a>
               </article>
 
             </div>
