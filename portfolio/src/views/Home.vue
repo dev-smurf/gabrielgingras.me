@@ -334,7 +334,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   margin-bottom: 3rem;
   flex-wrap: wrap;
   gap: 1rem;
@@ -357,9 +357,9 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
 
 .nav {
   display: flex;
-  gap: 1.25rem;
+  gap: 1rem;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
 }
 
 .lang-toggle {
