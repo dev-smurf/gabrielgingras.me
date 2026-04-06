@@ -68,6 +68,25 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
             "The future belongs to those who build with AI, not those who watch it pass by."
           ) }}
         </p>
+
+        <a href="https://tokscale.ai/u/dev-smurf" target="_blank" rel="noopener" class="tokscale-card">
+          <img src="/logo-claude.svg" alt="" class="tokscale-claude">
+          <div class="tokscale-stat">
+            <span class="tokscale-value">6.3B</span>
+            <span class="tokscale-label">tokens</span>
+          </div>
+          <div class="tokscale-sep"></div>
+          <div class="tokscale-stat">
+            <span class="tokscale-value">$3,637</span>
+            <span class="tokscale-label">{{ t('dépensés', 'spent') }}</span>
+          </div>
+          <div class="tokscale-sep"></div>
+          <div class="tokscale-stat">
+            <span class="tokscale-value">76</span>
+            <span class="tokscale-label">{{ t('jours streak', 'day streak') }}</span>
+          </div>
+          <span class="tokscale-badge">tokscale.ai &#8599;</span>
+        </a>
       </section>
 
       <hr class="sep fade" style="--d: 2">
@@ -429,6 +448,78 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
 
 .bio a:hover {
   background-size: 100% 1px;
+}
+
+/* ── Tokscale card ── */
+.tokscale-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: #efe3d2;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  color: #2c2418;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 0.25rem;
+}
+
+.tokscale-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(30, 24, 18, 0.08);
+}
+
+.tokscale-claude {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.tokscale-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.tokscale-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #1e1812;
+  line-height: 1;
+}
+
+.tokscale-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: #9a8b7a;
+  letter-spacing: 0.05em;
+}
+
+.tokscale-sep {
+  width: 1px;
+  height: 28px;
+  background: #ddd0c0;
+}
+
+.tokscale-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: #c45d31;
+  margin-left: auto;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 480px) {
+  .tokscale-card {
+    gap: 0.9rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .tokscale-value {
+    font-size: 1.1rem;
+  }
 }
 
 /* ── Separator ── */
