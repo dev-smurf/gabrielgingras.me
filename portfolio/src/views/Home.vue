@@ -85,7 +85,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
             <span class="tokscale-value">76</span>
             <span class="tokscale-label">{{ t('jours streak', 'day streak') }}</span>
           </div>
-          <span class="tokscale-badge">tokscale.ai &#8599;</span>
+          <span class="tokscale-badge">tokscale.ai <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
         </a>
       </section>
 
@@ -147,8 +147,8 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
               ) }}</li>
             </ul>
             <div class="entry-links" @click.stop>
-              <a href="https://backdoorproject.com" target="_blank" rel="noopener">Site &#8599;</a>
-              <a href="https://instagram.com/backdoor.project" target="_blank" rel="noopener">Instagram &#8599;</a>
+              <a href="https://backdoorproject.com" target="_blank" rel="noopener">Site <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+              <a href="https://instagram.com/backdoor.project" target="_blank" rel="noopener">Instagram <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
               <img src="/logo-homard.png" alt="" class="project-logo">
               <strong>Homard Cloud</strong>
               <span class="project-date">2026</span>
-              <span class="project-arrow">&#8599;</span>
+              <span class="project-arrow"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
             </div>
             <p>{{ t(
               "Plateforme d'hébergement géré pour assistants IA : déploiement 1 clic sur WhatsApp, Telegram, Slack, Discord, Signal et Teams. Infrastructure Kubernetes, Cloudflare Tunnel, provisioning automatisé.",
@@ -180,7 +180,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
               <img src="/logo-canopia.svg" alt="" class="project-logo">
               <strong>Canopia</strong>
               <span class="project-date">2026</span>
-              <span class="project-arrow">&#8599;</span>
+              <span class="project-arrow"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
             </div>
             <p>{{ t(
               "Application web de photo-interprétation forestière combinant LiDAR, imagerie satellite et données du MRNF, avec moteur d'optimisation IA et visualisation cartographique en temps réel.",
@@ -194,7 +194,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
               <img src="/logo-weathermellon.png" alt="" class="project-logo">
               <strong>WeatherMellon</strong>
               <span class="project-date">2025</span>
-              <span class="project-arrow">&#8599;</span>
+              <span class="project-arrow"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
             </div>
             <p>{{ t(
               "Plateforme météo pour le NASA Space Apps Challenge. 48h de coding, globe 3D, données depuis 1981.",
@@ -208,7 +208,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
               <img src="/logo-backdoor.png" alt="" class="project-logo">
               <strong>Backdoor Project</strong>
               <span class="project-date">2025</span>
-              <span class="project-arrow">&#8599;</span>
+              <span class="project-arrow"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
             </div>
             <p>{{ t(
               "Site e-commerce headless avec l'API Shopify. Design minimaliste, expérience personnalisée.",
@@ -261,8 +261,8 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
             <span class="entry-date">{{ t('Avril 2026', 'Apr. 2026') }}</span>
           </div>
           <div class="entry-dist-links">
-            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7442702617622888449/" target="_blank" rel="noopener">Post &#8599;</a>
-            <a href="https://www.linkedin.com/posts/botpressadk-share-7439377929555369984-4bD6" target="_blank" rel="noopener">Concours &#8599;</a>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7442702617622888449/" target="_blank" rel="noopener">Post <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+            <a href="https://www.linkedin.com/posts/botpressadk-share-7439377929555369984-4bD6" target="_blank" rel="noopener">Concours <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
           </div>
         </div>
 
@@ -275,8 +275,8 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
             <span class="entry-date">{{ t('Mars 2026', 'Mar. 2026') }}</span>
           </div>
           <div class="entry-dist-links">
-            <a href="https://bphacks.com/" target="_blank" rel="noopener">bphacks.com &#8599;</a>
-            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7439011555435810816/" target="_blank" rel="noopener">Post &#8599;</a>
+            <a href="https://bphacks.com/" target="_blank" rel="noopener">bphacks.com <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7439011555435810816/" target="_blank" rel="noopener">Post <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
           </div>
         </div>
 
@@ -289,7 +289,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
             <span class="entry-date">2025</span>
           </div>
           <div class="entry-dist-links">
-            <a href="https://www.osentreprendre.quebec/defi-osentreprendre/volet/etudiant/" target="_blank" rel="noopener">osentreprendre.quebec &#8599;</a>
+            <a href="https://www.osentreprendre.quebec/defi-osentreprendre/volet/etudiant/" target="_blank" rel="noopener">osentreprendre.quebec <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
           </div>
         </div>
 
@@ -302,8 +302,8 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
             <span class="entry-date">{{ t('Oct. 2025', 'Oct. 2025') }}</span>
           </div>
           <div class="entry-dist-links">
-            <a href="https://www.spaceappschallenge.org/2025/" target="_blank" rel="noopener">spaceappschallenge.org &#8599;</a>
-            <a href="https://www.linkedin.com/pulse/48-heures-pour-concevoir-une-plateforme-m%C3%A9t%C3%A9o-nasa-space-boudreau-aefcc/" target="_blank" rel="noopener">Article &#8599;</a>
+            <a href="https://www.spaceappschallenge.org/2025/" target="_blank" rel="noopener">spaceappschallenge.org <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+            <a href="https://www.linkedin.com/pulse/48-heures-pour-concevoir-une-plateforme-m%C3%A9t%C3%A9o-nasa-space-boudreau-aefcc/" target="_blank" rel="noopener">Article <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
           </div>
         </div>
       </section>
@@ -760,8 +760,14 @@ a.project-card:hover {
 
 .project-arrow {
   color: #c45d31;
-  font-size: 0.85rem;
   transition: transform 0.2s;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.project-arrow .arrow-icon {
+  width: 12px;
+  height: 12px;
 }
 
 a.project-card:hover .project-arrow {
@@ -846,6 +852,14 @@ a.project-card:hover .project-arrow {
   }
 }
 
+/* ── Arrow icon ── */
+.arrow-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.15rem;
+  flex-shrink: 0;
+}
+
 /* ── Mobile ── */
 @media (max-width: 480px) {
   .container {
@@ -857,6 +871,25 @@ a.project-card:hover .project-arrow {
   }
 
   .entry-header {
+    flex-wrap: nowrap;
+  }
+
+  .entry-collapsible .entry-header {
+    flex-wrap: nowrap;
+  }
+
+  .entry-collapsible .entry-title-row {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .entry-collapsible .entry-title-row strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .entry:not(.entry-collapsible) .entry-header {
     flex-direction: column;
     gap: 0.1rem;
   }
