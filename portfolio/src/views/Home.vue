@@ -436,7 +436,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
   color: #1e1812;
 }
 
-.bio a {
+.bio a:not(.tokscale-card) {
   color: #c45d31;
   text-decoration: none;
   background-image: linear-gradient(#c45d31, #c45d31);
@@ -446,7 +446,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
   transition: background-size 0.3s ease;
 }
 
-.bio a:hover {
+.bio a:not(.tokscale-card):hover {
   background-size: 100% 1px;
 }
 
@@ -460,13 +460,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
   padding: 1rem 1.25rem;
   text-decoration: none;
   color: #2c2418;
-  transition: transform 0.2s, box-shadow 0.2s;
   margin-top: 0.25rem;
-}
-
-.tokscale-card:hover {
-  transform: none;
-  box-shadow: none;
 }
 
 .tokscale-claude {
