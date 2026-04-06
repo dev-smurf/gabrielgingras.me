@@ -229,7 +229,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
           <div class="entry-header">
             <div>
               <strong>{{ t('DEC en Informatique', 'CS Diploma (DEC)') }}</strong>
-              <span class="entry-role">{{ t('Cégep Garneau · Cheminement DEC-BAC', 'Cégep Garneau · DEC-BAC pathway') }}</span>
+              <span class="entry-role">Cégep Garneau</span>
             </div>
             <span class="entry-date">2023 — 2026</span>
           </div>
@@ -239,7 +239,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
           <div class="entry-header">
             <div>
               <strong>{{ t('Secondaire', 'High School') }}</strong>
-              <span class="entry-role">{{ t('Académie Saint-Louis · Profil langues ELA', 'Académie Saint-Louis · ELA language profile') }}</span>
+              <span class="entry-role">{{ t('Académie Saint-Louis · Profil sport-langues', 'Académie Saint-Louis · Sports-languages profile') }}</span>
             </div>
             <span class="entry-date">2018 — 2023</span>
           </div>
