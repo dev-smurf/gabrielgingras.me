@@ -465,8 +465,8 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
 }
 
 .tokscale-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(30, 24, 18, 0.08);
+  transform: none;
+  box-shadow: none;
 }
 
 .tokscale-claude {
