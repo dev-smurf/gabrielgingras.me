@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moodboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Nunito+Sans:wght@300;400;500&family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500&family=DM+Serif+Display&family=Outfit:wght@300;400;500&family=Lora:wght@400;500;600;700&family=Karla:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&family=Sora:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1e1812;
+      font-family: system-ui, sans-serif;
+      padding: 2.5rem 1.5rem 4rem;
+      color: #999;
+    }
+    h1 {
+      text-align: center;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #6b5d4f;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    @media (max-width: 500px) { .grid { grid-template-columns: 1fr; } }
+
+    .combo {
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .combo:hover { transform: translateY(-2px); }
+
+    .preview {
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+    .num {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.35;
+    }
+    .preview .heading {
+      font-size: 2.2rem;
+      line-height: 1;
+      margin-bottom: 0.6rem;
+    }
+    .preview .sub {
+      font-size: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .preview .body {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      max-width: 300px;
+    }
+
+    .bottom {
+      padding: 1rem 2rem 1.2rem;
+      background: rgba(0,0,0,0.18);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.06);
+    }
+    .font-names {
+      margin-left: auto;
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      opacity: 0.5;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    /* ── 1 — Cream light ── */
+    .c1 .preview { background: #f7ebdd; color: #2c2418; }
+    .c1 .heading { font-family: 'Fraunces', serif; font-weight: 700; color: #1e1812; }
+    .c1 .sub { font-family: 'Nunito Sans', sans-serif; color: #c45d31; }
+    .c1 .body { font-family: 'Nunito Sans', sans-serif; font-weight: 300; color: #6b5d4f; }
+    .c1 .bottom { color: #8a7b6a; }
+
+    /* ── 2 — Dark espresso ── */
+    .c2 .preview { background: #1e1812; color: #f7ebdd; }
+    .c2 .heading { font-family: 'Playfair Display', serif; font-weight: 700; color: #f7ebdd; }
+    .c2 .sub { font-family: 'Source Sans 3', sans-serif; color: #c45d31; }
+    .c2 .body { font-family: 'Source Sans 3', sans-serif; font-weight: 300; color: #9a8b7a; }
+    .c2 .bottom { color: #9a8b7a; }
+
+    /* ── 3 — Warm parchment ── */
+    .c3 .preview { background: #efe3d2; color: #2c2418; }
+    .c3 .heading { font-family: 'DM Serif Display', serif; font-weight: 400; color: #1e1812; }
+    .c3 .sub { font-family: 'Outfit', sans-serif; font-weight: 400; color: #b85a30; }
+    .c3 .body { font-family: 'Outfit', sans-serif; font-weight: 300; color: #7a6b5a; }
+    .c3 .bottom { color: #8a7b6a; }
+
+    /* ── 4 — Deep brown ── */
+    .c4 .preview { background: #261e16; color: #f0e0cc; }
+    .c4 .heading { font-family: 'Lora', serif; font-weight: 700; color: #f7ebdd; }
+    .c4 .sub { font-family: 'Karla', sans-serif; color: #d4744a; }
+    .c4 .body { font-family: 'Karla', sans-serif; font-weight: 300; color: #8a7b6a; }
+    .c4 .bottom { color: #8a7b6a; }
+
+    /* ── 5 — Latte ── */
+    .c5 .preview { background: #f2e6d4; color: #2c2418; }
+    .c5 .heading { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 2.6rem; color: #1e1812; }
+    .c5 .sub { font-family: 'Jost', sans-serif; font-weight: 300; color: #c45d31; letter-spacing: 0.03em; }
+    .c5 .body { font-family: 'Jost', sans-serif; font-weight: 300; color: #6b5d4f; }
+    .c5 .bottom { color: #8a7b6a; }
+
+    /* ── 6 — Charcoal warm ── */
+    .c6 .preview { background: #221a12; color: #e8dac8; }
+    .c6 .heading { font-family: 'Sora', sans-serif; font-weight: 600; letter-spacing: -0.03em; color: #f7ebdd; }
+    .c6 .sub { font-family: 'IBM Plex Sans', sans-serif; color: #c45d31; }
+    .c6 .body { font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; color: #8a7b6a; }
+    .c6 .bottom { color: #8a7b6a; }
+  </style>
+</head>
+<body>
+
+  <h1>Choisis ton combo — fonts + couleurs</h1>
+
+  <div class="grid">
+
+    <div class="combo c1">
+      <div class="preview">
+        <span class="num">#1</span>
+        <div class="heading">Gabriel Gingras</div>
+        <div class="sub">analyste en cybersecurite</div>
+        <div class="body">Etudiant en informatique, je travaille en cybersecurite au gouvernement du Quebec et je developpe une marque de vetements locale.</div>
+      </div>
+      <div class="bottom">
+        <div class="swatch" style="background:#f7ebdd"></div>
+        <div class="swatch" style="background:#1e1812"></div>
+        <div class="swatch" style="background:#c45d31"></div>
+        <div class="swatch" style="background:#6b5d4f"></div>
+        <div class="font-names">Fraunces<br>Nunito Sans</div>
+      </div>
+    </div>
+
+    <div class="combo c2">
+      <div class="preview">
+        <span class="num">#2</span>
+        <div class="heading">Gabriel Gingras</div>
+        <div class="sub">analyste en cybersecurite</div>
+        <div class="body">Etudiant en informatique, je travaille en cybersecurite au gouvernement du Quebec et je developpe une marque de vetements locale.</div>
+      </div>
+      <div class="bottom">
+        <div class="swatch" style="background:#1e1812"></div>
+        <div class="swatch" style="background:#f7ebdd"></div>
+        <div class="swatch" style="background:#c45d31"></div>
+        <div class="swatch" style="background:#9a8b7a"></div>
+        <div class="font-names">Playfair Display<br>Source Sans 3</div>
+      </div>
+    </div>
+
+    <div class="combo c3">
+      <div class="preview">
+        <span class="num">#3</span>
+        <div class="heading">Gabriel Gingras</div>
+        <div class="sub">analyste en cybersecurite</div>
+        <div class="body">Etudiant en informatique, je travaille en cybersecurite au gouvernement du Quebec et je developpe une marque de vetements locale.</div>
+      </div>
+      <div class="bottom">
+        <div class="swatch" style="background:#efe3d2"></div>
+        <div class="swatch" style="background:#1e1812"></div>
+        <div class="swatch" style="background:#b85a30"></div>
+        <div class="swatch" style="background:#7a6b5a"></div>
+        <div class="font-names">DM Serif Display<br>Outfit</div>
+      </div>
+    </div>
+
+    <div class="combo c4">
+      <div class="preview">
+        <span class="num">#4</span>
+        <div class="heading">Gabriel Gingras</div>
+        <div class="sub">analyste en cybersecurite</div>
+        <div class="body">Etudiant en informatique, je travaille en cybersecurite au gouvernement du Quebec et je developpe une marque de vetements locale.</div>
+      </div>
+      <div class="bottom">
+        <div class="swatch" style="background:#261e16"></div>
+        <div class="swatch" style="background:#f0e0cc"></div>
+        <div class="swatch" style="background:#d4744a"></div>
+        <div class="swatch" style="background:#8a7b6a"></div>
+        <div class="font-names">Lora<br>Karla</div>
+      </div>
+    </div>
+
+    <div class="combo c5">
+      <div class="preview">
+        <span class="num">#5</span>
+        <div class="heading">Gabriel Gingras</div>
+        <div class="sub">analyste en cybersecurite</div>
+        <div class="body">Etudiant en informatique, je travaille en cybersecurite au gouvernement du Quebec et je developpe une marque de vetements locale.</div>
+      </div>
+      <div class="bottom">
+        <div class="swatch" style="background:#f2e6d4"></div>
+        <div class="swatch" style="background:#1e1812"></div>
+        <div class="swatch" style="background:#c45d31"></div>
+        <div class="swatch" style="background:#6b5d4f"></div>
+        <div class="font-names">Cormorant Garamond<br>Jost</div>
+      </div>
+    </div>
+
+    <div class="combo c6">
+      <div class="preview">
+        <span class="num">#6</span>
+        <div class="heading">Gabriel Gingras</div>
+        <div class="sub">analyste en cybersecurite</div>
+        <div class="body">Etudiant en informatique, je travaille en cybersecurite au gouvernement du Quebec et je developpe une marque de vetements locale.</div>
+      </div>
+      <div class="bottom">
+        <div class="swatch" style="background:#221a12"></div>
+        <div class="swatch" style="background:#e8dac8"></div>
+        <div class="swatch" style="background:#c45d31"></div>
+        <div class="swatch" style="background:#8a7b6a"></div>
+        <div class="font-names">Sora<br>IBM Plex Sans</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
