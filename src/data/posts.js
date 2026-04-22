@@ -6,7 +6,7 @@ const modules = import.meta.glob('/src/content/blog/**/*.md', {
   import: 'default',
 })
 
-function parseFrontmatter(raw) {
+export function parseFrontmatter(raw) {
   const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
   if (!match) return { meta: {}, body: raw }
 
@@ -26,7 +26,7 @@ function parseFrontmatter(raw) {
   return { meta, body: match[2] }
 }
 
-function splitLang(body) {
+export function splitLang(body) {
   const parts = body.split(/\n---\n\n<!-- en -->\n/)
   const fr = parts[0].trim()
   const en = parts.length > 1 ? parts[1].trim() : fr

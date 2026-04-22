@@ -1,7 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, reactive, onMounted, watch } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { posts } from '@/data/posts.js'
+import { supabase } from '@/lib/supabase.js'
+import CommentItem from '@/components/CommentItem.vue'
 
 const route = useRoute()
 
@@ -19,6 +21,134 @@ const formatDate = (dateStr) => {
     day: 'numeric',
   })
 }
+
+const allComments = ref([])
+const commentName = ref('')
+const commentContent = ref('')
+const submitting = ref(false)
+const submitError = ref('')
+const loadError = ref(false)
+const replyingTo = ref(null)
+const replyName = ref('')
+const replyContent = ref('')
+const lastSubmitTime = ref(0)
+const honeypot = ref('')
+
+const COOLDOWN_MS = 10_000
+
+const collapsed = reactive(new Set())
+
+const topComments = computed(() => allComments.value.filter(c => !c.parent_id))
+const repliesMap = computed(() => {
+  const map = {}
+  for (const c of allComments.value) {
+    if (c.parent_id) {
+      if (!map[c.parent_id]) map[c.parent_id] = []
+      map[c.parent_id].push(c)
+    }
+  }
+  return map
+})
+
+const toggleCollapse = (id) => {
+  collapsed.has(id) ? collapsed.delete(id) : collapsed.add(id)
+}
+
+const fetchComments = async () => {
+  loadError.value = false
+  try {
+    const { data, error } = await supabase
+      .from('comments')
+      .select('*')
+      .eq('slug', route.params.slug)
+      .order('created_at', { ascending: true })
+    if (error) throw error
+    allComments.value = data || []
+  } catch {
+    loadError.value = true
+    allComments.value = []
+  }
+}
+
+const checkCooldown = () => {
+  const elapsed = Date.now() - lastSubmitTime.value
+  if (elapsed < COOLDOWN_MS) {
+    const secs = Math.ceil((COOLDOWN_MS - elapsed) / 1000)
+    submitError.value = t(`Attends ${secs}s avant de reposter.`, `Wait ${secs}s before posting again.`)
+    return false
+  }
+  return true
+}
+
+const submitComment = async () => {
+  if (honeypot.value) return
+  const name = commentName.value.trim()
+  const content = commentContent.value.trim()
+  if (!name || !content) return
+  if (!checkCooldown()) return
+
+  submitting.value = true
+  submitError.value = ''
+
+  try {
+    const { error } = await supabase
+      .from('comments')
+      .insert({ slug: route.params.slug, name, content, parent_id: null })
+    if (error) throw error
+    commentName.value = ''
+    commentContent.value = ''
+    lastSubmitTime.value = Date.now()
+    await fetchComments()
+  } catch {
+    submitError.value = t('Erreur, réessaie.', 'Error, try again.')
+  }
+  submitting.value = false
+}
+
+const submitReply = async (parentId) => {
+  if (honeypot.value) return
+  const name = replyName.value.trim()
+  const content = replyContent.value.trim()
+  if (!name || !content) return
+  if (!checkCooldown()) return
+
+  submitting.value = true
+  submitError.value = ''
+
+  try {
+    const { error } = await supabase
+      .from('comments')
+      .insert({ slug: route.params.slug, name, content, parent_id: parentId })
+    if (error) throw error
+    replyName.value = ''
+    replyContent.value = ''
+    replyingTo.value = null
+    lastSubmitTime.value = Date.now()
+    await fetchComments()
+  } catch {
+    submitError.value = t('Erreur, réessaie.', 'Error, try again.')
+  }
+  submitting.value = false
+}
+
+const openReply = (commentId) => {
+  replyingTo.value = replyingTo.value === commentId ? null : commentId
+  replyName.value = ''
+  replyContent.value = ''
+  submitError.value = ''
+}
+
+const formatCommentDate = (iso) => {
+  const date = new Date(iso)
+  return date.toLocaleDateString(lang.value === 'fr' ? 'fr-CA' : 'en-CA', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+}
+
+onMounted(fetchComments)
+watch(() => route.params.slug, fetchComments)
 </script>
 
 <template>
@@ -49,6 +179,56 @@ const formatDate = (dateStr) => {
             v-html="lang === 'fr' ? post.content : post.contentEn"
           ></div>
         </article>
+
+        <section class="comments-section fade" style="--d: 2">
+          <h2 class="comments-title">{{ t('Commentaires', 'Comments') }}</h2>
+
+          <!-- Main comment form (always on top) -->
+          <form class="comment-form main-form" @submit.prevent="submitComment">
+            <input v-model="honeypot" type="text" class="hp-field" tabindex="-1" autocomplete="off">
+            <input v-model="commentName" type="text" :placeholder="t('Ton nom', 'Your name')" maxlength="50" class="comment-input">
+            <textarea v-model="commentContent" :placeholder="t('Ton commentaire...', 'Your comment...')" maxlength="1000" rows="3" class="comment-textarea"></textarea>
+            <div class="comment-form-footer">
+              <span class="comment-notice">{{ t('Les commentaires ne peuvent pas être modifiés ou supprimés.', 'Comments cannot be edited or deleted.') }}</span>
+              <button type="submit" class="comment-submit" :disabled="submitting || !commentName.trim() || !commentContent.trim()">
+                {{ submitting ? '...' : t('Envoyer', 'Send') }}
+              </button>
+            </div>
+            <span v-if="submitError && !replyingTo" class="comment-error">{{ submitError }}</span>
+          </form>
+
+          <!-- Comments list -->
+          <div v-if="topComments.length" class="comments-list">
+            <CommentItem
+              v-for="c in topComments"
+              :key="c.id"
+              :comment="c"
+              :replies="repliesMap"
+              :replying-to="replyingTo"
+              :collapsed="collapsed"
+              :submitting="submitting"
+              :submit-error="submitError"
+              :t="t"
+              :format-date="formatCommentDate"
+              @reply="openReply"
+              @submit-reply="submitReply"
+              @toggle-collapse="toggleCollapse"
+            >
+              <template #reply-form>
+                <input v-model="replyName" type="text" :placeholder="t('Ton nom', 'Your name')" maxlength="50" class="comment-input">
+                <textarea v-model="replyContent" :placeholder="t('Ta réponse...', 'Your reply...')" maxlength="1000" rows="2" class="comment-textarea"></textarea>
+                <div class="comment-form-footer">
+                  <span v-if="submitError" class="comment-error">{{ submitError }}</span>
+                  <button type="submit" class="comment-submit" :disabled="submitting || !replyName.trim() || !replyContent.trim()">
+                    {{ submitting ? '...' : t('Envoyer', 'Send') }}
+                  </button>
+                </div>
+              </template>
+            </CommentItem>
+          </div>
+          <p v-else-if="loadError" class="comments-error">{{ t('Impossible de charger les commentaires.', 'Could not load comments.') }}</p>
+          <p v-else class="comments-empty">{{ t('Aucun commentaire.', 'No comments yet.') }}</p>
+        </section>
       </template>
 
       <template v-else>
@@ -280,6 +460,127 @@ const formatDate = (dateStr) => {
 
 .back-cta:hover {
   opacity: 0.7;
+}
+
+/* ── Comments ── */
+.comments-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ddd0c0;
+}
+
+.comments-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #1e1812;
+  margin: 0 0 1.25rem;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 1.5rem;
+}
+
+.main-form {
+  margin-bottom: 0.5rem;
+}
+
+.comment-notice {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: #9a8b7a;
+  letter-spacing: 0.02em;
+}
+
+.comments-empty,
+.comments-error {
+  font-size: 0.82rem;
+  color: #9a8b7a;
+  margin: 0 0 1.5rem;
+}
+
+.comments-error {
+  color: #c45d31;
+}
+
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  pointer-events: none;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.comment-input,
+.comment-textarea {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  color: #2c2418;
+  background: #efe3d2;
+  border: 1px solid #ddd0c0;
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.comment-input:focus,
+.comment-textarea:focus {
+  border-color: #c45d31;
+}
+
+.comment-input::placeholder,
+.comment-textarea::placeholder {
+  color: #9a8b7a;
+}
+
+.comment-textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.comment-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.comment-error {
+  font-size: 0.72rem;
+  color: #c45d31;
+}
+
+.comment-submit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.03em;
+  color: #f7ebdd;
+  background: #c45d31;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.comment-submit:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.comment-submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* ── Footer ── */
