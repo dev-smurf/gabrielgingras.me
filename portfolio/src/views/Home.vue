@@ -72,18 +72,18 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
         <a href="https://tokscale.ai/u/dev-smurf" target="_blank" rel="noopener" class="tokscale-card">
           <img src="/logo-claude.svg" alt="" class="tokscale-claude">
           <div class="tokscale-stat">
-            <span class="tokscale-value">6.3B</span>
+            <span class="tokscale-value">6.1B</span>
             <span class="tokscale-label">tokens</span>
           </div>
           <div class="tokscale-sep"></div>
           <div class="tokscale-stat">
-            <span class="tokscale-value">$3,637</span>
+            <span class="tokscale-value">$3,457</span>
             <span class="tokscale-label">{{ t('dépensés', 'spent') }}</span>
           </div>
           <div class="tokscale-sep"></div>
           <div class="tokscale-stat">
-            <span class="tokscale-value">76</span>
-            <span class="tokscale-label">{{ t('jours streak', 'day streak') }}</span>
+            <span class="tokscale-value">88</span>
+            <span class="tokscale-label">{{ t('jours actifs', 'active days') }}</span>
           </div>
           <span class="tokscale-badge">tokscale.ai <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
         </a>
