@@ -46,14 +46,14 @@ describe('CommentItem', () => {
 
   it('shows reply button', () => {
     const wrapper = mount(CommentItem, { props: defaultProps })
-    const btn = wrapper.find('.comment-reply-btn')
+    const btn = wrapper.find('.comment-action-btn')
     expect(btn.exists()).toBe(true)
     expect(btn.text()).toBe('Répondre')
   })
 
   it('emits reply event on reply button click', async () => {
     const wrapper = mount(CommentItem, { props: defaultProps })
-    await wrapper.find('.comment-reply-btn').trigger('click')
+    await wrapper.find('.comment-action-btn').trigger('click')
     expect(wrapper.emitted('reply')).toBeTruthy()
     expect(wrapper.emitted('reply')[0]).toEqual(['c1'])
   })
@@ -62,7 +62,7 @@ describe('CommentItem', () => {
     const wrapper = mount(CommentItem, {
       props: { ...defaultProps, replyingTo: 'c1' },
     })
-    expect(wrapper.find('.comment-reply-btn').text()).toBe('Annuler')
+    expect(wrapper.find('.comment-action-btn').text()).toBe('Annuler')
   })
 
   it('renders nested replies', () => {
@@ -76,19 +76,16 @@ describe('CommentItem', () => {
     expect(wrapper.text()).toContain('Thanks!')
   })
 
-  it('shows fold button when replies exist', () => {
+  it('shows hide button when replies exist', () => {
     const wrapper = mount(CommentItem, {
       props: {
         ...defaultProps,
         replies: { c1: [mockReply] },
       },
     })
-    expect(wrapper.find('.comment-fold').exists()).toBe(true)
-  })
-
-  it('does not show fold button when no replies', () => {
-    const wrapper = mount(CommentItem, { props: defaultProps })
-    expect(wrapper.find('.comment-fold').exists()).toBe(false)
+    const btns = wrapper.findAll('.comment-action-btn')
+    const hideBtn = btns.find(b => b.text() === 'Masquer')
+    expect(hideBtn).toBeTruthy()
   })
 
   it('hides replies when collapsed', () => {
@@ -101,38 +98,34 @@ describe('CommentItem', () => {
       },
     })
     expect(wrapper.text()).not.toContain('Bob')
-    expect(wrapper.text()).toContain('1 réponse(s) masquée(s)')
   })
 
-  it('emits toggle-collapse on fold click', async () => {
+  it('shows "Voir N réponses" when collapsed', () => {
+    const collapsed = new Set(['c1'])
+    const wrapper = mount(CommentItem, {
+      props: {
+        ...defaultProps,
+        replies: { c1: [mockReply] },
+        collapsed,
+      },
+    })
+    const btns = wrapper.findAll('.comment-action-btn')
+    const showBtn = btns.find(b => b.text().includes('Voir'))
+    expect(showBtn).toBeTruthy()
+  })
+
+  it('emits toggle-collapse on hide/show click', async () => {
     const wrapper = mount(CommentItem, {
       props: {
         ...defaultProps,
         replies: { c1: [mockReply] },
       },
     })
-    await wrapper.find('.comment-fold').trigger('click')
+    const btns = wrapper.findAll('.comment-action-btn')
+    const hideBtn = btns.find(b => b.text() === 'Masquer')
+    await hideBtn.trigger('click')
     expect(wrapper.emitted('toggle-collapse')).toBeTruthy()
     expect(wrapper.emitted('toggle-collapse')[0]).toEqual(['c1'])
-  })
-
-  it('applies depth indentation via CSS var', () => {
-    const wrapper = mount(CommentItem, {
-      props: { ...defaultProps, depth: 2 },
-    })
-    expect(wrapper.find('.comment-node').attributes('style')).toContain('--depth: 2')
-  })
-
-  it('adds is-reply class when depth > 0', () => {
-    const wrapper = mount(CommentItem, {
-      props: { ...defaultProps, depth: 1 },
-    })
-    expect(wrapper.find('.comment').classes()).toContain('is-reply')
-  })
-
-  it('does not add is-reply class at depth 0', () => {
-    const wrapper = mount(CommentItem, { props: defaultProps })
-    expect(wrapper.find('.comment').classes()).not.toContain('is-reply')
   })
 
   it('shows reply form slot when replyingTo matches', () => {
@@ -143,5 +136,10 @@ describe('CommentItem', () => {
       },
     })
     expect(wrapper.find('.test-reply-form').exists()).toBe(true)
+  })
+
+  it('displays dot separator between name and date', () => {
+    const wrapper = mount(CommentItem, { props: defaultProps })
+    expect(wrapper.find('.comment-dot').exists()).toBe(true)
   })
 })

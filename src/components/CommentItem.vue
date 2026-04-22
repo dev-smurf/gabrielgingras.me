@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue'
+
 defineOptions({ name: 'CommentItem' })
 
 const props = defineProps({
@@ -17,32 +19,33 @@ const emit = defineEmits(['reply', 'submit-reply', 'toggle-collapse'])
 
 const MAX_DEPTH = 4
 
-const childComments = props.replies[props.comment.id] || []
+const childComments = computed(() => props.replies[props.comment.id] || [])
 const isCollapsed = () => props.collapsed.has(props.comment.id)
 </script>
 
 <template>
-  <div class="comment-node" :style="{ '--depth': Math.min(depth, MAX_DEPTH) }">
-    <div class="comment" :class="{ 'is-reply': depth > 0 }">
-      <div class="comment-header">
-        <div class="comment-header-left">
-          <button
-            v-if="childComments.length"
-            class="comment-fold"
-            @click="emit('toggle-collapse', comment.id)"
-          >{{ isCollapsed() ? '+' : '−' }}</button>
-          <span class="comment-name">{{ comment.name }}</span>
-        </div>
+  <div class="comment-node">
+    <div class="comment">
+      <div class="comment-meta">
+        <span class="comment-name">{{ comment.name }}</span>
+        <span class="comment-dot">&middot;</span>
         <span class="comment-date">{{ formatDate(comment.created_at) }}</span>
       </div>
       <p class="comment-content">{{ comment.content }}</p>
-      <button class="comment-reply-btn" @click="emit('reply', comment.id)">
-        {{ replyingTo === comment.id ? t('Annuler', 'Cancel') : t('Répondre', 'Reply') }}
-      </button>
+      <div class="comment-actions">
+        <button class="comment-action-btn" @click="emit('reply', comment.id)">
+          {{ replyingTo === comment.id ? t('Annuler', 'Cancel') : t('Répondre', 'Reply') }}
+        </button>
+        <button
+          v-if="childComments.length"
+          class="comment-action-btn"
+          @click="emit('toggle-collapse', comment.id)"
+        >{{ isCollapsed() ? t(`Voir ${childComments.length} réponse(s)`, `Show ${childComments.length} reply(ies)`) : t('Masquer', 'Hide') }}</button>
+      </div>
     </div>
 
     <!-- Inline reply form -->
-    <form v-if="replyingTo === comment.id" class="comment-form reply-form" @submit.prevent="emit('submit-reply', comment.id)">
+    <form v-if="replyingTo === comment.id" class="reply-form" @submit.prevent="emit('submit-reply', comment.id)">
       <slot name="reply-form"></slot>
     </form>
 
@@ -53,7 +56,7 @@ const isCollapsed = () => props.collapsed.has(props.comment.id)
         :key="child.id"
         :comment="child"
         :replies="replies"
-        :depth="depth + 1"
+        :depth="Math.min(depth + 1, MAX_DEPTH)"
         :replying-to="replyingTo"
         :collapsed="collapsed"
         :submitting="submitting"
@@ -69,70 +72,41 @@ const isCollapsed = () => props.collapsed.has(props.comment.id)
         </template>
       </CommentItem>
     </div>
-
-    <p v-if="childComments.length && isCollapsed()" class="collapsed-hint">
-      {{ childComments.length }} {{ t('réponse(s) masquée(s)', 'hidden reply(ies)') }}
-    </p>
   </div>
 </template>
 
 <style scoped>
 .comment-node {
-  margin-left: calc(var(--depth) * 1rem);
-}
-
-.comment-node:first-child > .comment.is-reply {
-  margin-top: 0;
+  padding-left: 0;
 }
 
 .comment {
-  background: #efe3d2;
-  border-radius: 8px;
-  padding: 0.85rem 1rem;
-  margin-top: 0.5rem;
+  padding: 0.6rem 0;
 }
 
-.comment.is-reply {
-  border-left: 2px solid #ddd0c0;
-  border-radius: 0 8px 8px 0;
+.comment-node .comment-children {
+  padding-left: 1.25rem;
+  border-left: 1px solid #ddd0c0;
+  margin-left: 0.5rem;
 }
 
-.comment-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 0.35rem;
-}
-
-.comment-header-left {
+.comment-meta {
   display: flex;
   align-items: baseline;
-  gap: 0.4rem;
-}
-
-.comment-fold {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  color: #9a8b7a;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  line-height: 1;
-  width: 1rem;
-  text-align: center;
-  transition: color 0.2s;
-}
-
-.comment-fold:hover {
-  color: #c45d31;
+  gap: 0.35rem;
+  margin-bottom: 0.2rem;
 }
 
 .comment-name {
   font-family: 'Outfit', sans-serif;
   font-weight: 500;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: #1e1812;
+}
+
+.comment-dot {
+  font-size: 0.6rem;
+  color: #9a8b7a;
 }
 
 .comment-date {
@@ -142,45 +116,37 @@ const isCollapsed = () => props.collapsed.has(props.comment.id)
 }
 
 .comment-content {
-  font-size: 0.85rem;
-  line-height: 1.6;
+  font-size: 0.82rem;
+  line-height: 1.55;
   color: #3d3228;
   margin: 0;
 }
 
-.comment-reply-btn {
+.comment-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.comment-action-btn {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.55rem;
   color: #9a8b7a;
   background: none;
   border: none;
   padding: 0;
-  margin-top: 0.35rem;
   cursor: pointer;
   letter-spacing: 0.02em;
   transition: color 0.2s;
 }
 
-.comment-reply-btn:hover {
+.comment-action-btn:hover {
   color: #c45d31;
 }
 
-.comment-children {
-  margin-top: 0;
-}
-
-.collapsed-hint {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  color: #9a8b7a;
-  margin: 0.35rem 0 0 1rem;
-  cursor: default;
-}
-
 .reply-form {
-  margin-top: 0.5rem;
-  margin-left: 1rem;
-  padding-left: 0.75rem;
+  margin: 0.35rem 0 0.5rem 0.5rem;
+  padding-left: 1rem;
   border-left: 2px solid #c45d31;
   display: flex;
   flex-direction: column;
@@ -188,8 +154,8 @@ const isCollapsed = () => props.collapsed.has(props.comment.id)
 }
 
 @media (max-width: 480px) {
-  .comment-node {
-    margin-left: calc(var(--depth) * 0.5rem);
+  .comment-node .comment-children {
+    padding-left: 0.75rem;
   }
 }
 </style>

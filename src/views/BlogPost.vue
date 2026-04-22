@@ -478,14 +478,13 @@ watch(() => route.params.slug, fetchComments)
 }
 
 .comments-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
   margin-top: 1.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #ddd0c0;
 }
 
 .main-form {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
 .comment-notice {
