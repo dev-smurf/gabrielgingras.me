@@ -28,7 +28,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
       <header class="header fade" style="--d: 0">
         <div class="header-left">
           <h1 class="name">Gabriel Gingras</h1>
-          <span class="title">{{ t('Dev & IA Agentique', 'Dev & Agentic AI') }}</span>
+          <span class="title">{{ t('Builder & IA Agentique', 'Builder & Agentic AI') }}</span>
         </div>
         <nav class="nav">
           <button class="lang-toggle" @click="toggle">{{ lang === 'fr' ? 'EN' : 'FR' }}</button>
