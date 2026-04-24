@@ -95,31 +95,6 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
       <section class="section fade" style="--d: 2">
         <h2 class="section-label">{{ t('Expérience', 'Experience') }}</h2>
 
-        <div class="entry entry-collapsible" :class="{ open: openEntry === 'mcn' }" @click="toggleEntry('mcn')">
-          <div class="entry-header">
-            <div class="entry-title-row">
-              <img src="/logo-quebec.png" alt="" class="entry-logo">
-              <div>
-                <strong>{{ t('Ministère de la Cybersécurité et du Numérique', 'Ministry of Cybersecurity and Digital') }}</strong>
-                <span class="entry-role">{{ t('Analyste et développeur', 'Analyst & Developer') }}</span>
-              </div>
-            </div>
-            <span class="entry-date">2023 — {{ t('Présent', 'Present') }}</span>
-          </div>
-          <div class="entry-details">
-            <ul class="entry-list">
-              <li>{{ t(
-                "Conception et développement d'un système automatisé de génération d'avis de sécurité, réduisant le temps de production.",
-                "Designed and developed an automated security advisory generation system, reducing production time."
-              ) }}</li>
-              <li>{{ t(
-                "Réalisation de tests d'intrusion (pentests) et d'analyses de vulnérabilités à l'aide de Tenable.",
-                "Performed penetration tests and vulnerability assessments using Tenable."
-              ) }}</li>
-            </ul>
-          </div>
-        </div>
-
         <div class="entry entry-collapsible" :class="{ open: openEntry === 'backdoor' }" @click="toggleEntry('backdoor')">
           <div class="entry-header">
             <div class="entry-title-row">
@@ -150,6 +125,31 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
               <a href="https://backdoorproject.com" target="_blank" rel="noopener">Site <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
               <a href="https://instagram.com/backdoor.project" target="_blank" rel="noopener">Instagram <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
             </div>
+          </div>
+        </div>
+
+        <div class="entry entry-collapsible" :class="{ open: openEntry === 'mcn' }" @click="toggleEntry('mcn')">
+          <div class="entry-header">
+            <div class="entry-title-row">
+              <img src="/logo-quebec.png" alt="" class="entry-logo">
+              <div>
+                <strong>{{ t('Ministère de la Cybersécurité et du Numérique', 'Ministry of Cybersecurity and Digital') }}</strong>
+                <span class="entry-role">{{ t('Analyste et développeur', 'Analyst & Developer') }}</span>
+              </div>
+            </div>
+            <span class="entry-date">2023 — {{ t('Présent', 'Present') }}</span>
+          </div>
+          <div class="entry-details">
+            <ul class="entry-list">
+              <li>{{ t(
+                "Conception et développement d'un système automatisé de génération d'avis de sécurité, réduisant le temps de production.",
+                "Designed and developed an automated security advisory generation system, reducing production time."
+              ) }}</li>
+              <li>{{ t(
+                "Réalisation de tests d'intrusion (pentests) et d'analyses de vulnérabilités à l'aide de Tenable.",
+                "Performed penetration tests and vulnerability assessments using Tenable."
+              ) }}</li>
+            </ul>
           </div>
         </div>
       </section>
