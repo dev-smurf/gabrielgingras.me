@@ -1,9 +1,20 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useHead } from '@unhead/vue'
 import { useLang } from '@/composables/useLang.js'
 
 const { lang, toggle, t } = useLang()
+
+useHead({
+  title: computed(() => t('Gabriel Gingras — Dev & IA Agentique', 'Gabriel Gingras — Dev & Agentic AI')),
+  meta: [
+    { name: 'description', content: computed(() => t(
+      'Portfolio de Gabriel Gingras — développeur passionné par l\'intelligence artificielle, les agents autonomes et l\'automatisation.',
+      'Gabriel Gingras portfolio — developer passionate about artificial intelligence, autonomous agents and automation.'
+    )) },
+  ],
+})
 
 const openEntry = ref(null)
 const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : id }

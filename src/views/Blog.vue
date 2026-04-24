@@ -1,11 +1,22 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useHead } from '@unhead/vue'
 import { posts } from '@/data/posts.js'
 import { supabase } from '@/lib/supabase.js'
 import { useLang } from '@/composables/useLang.js'
 
 const { lang, toggle, t } = useLang()
+
+useHead({
+  title: computed(() => t('Blog — Gabriel Gingras', 'Blog — Gabriel Gingras')),
+  meta: [
+    { name: 'description', content: computed(() => t(
+      'Articles sur le développement, l\'IA et mes projets.',
+      'Articles about development, AI and my projects.'
+    )) },
+  ],
+})
 
 const commentCounts = ref({})
 

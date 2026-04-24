@@ -4,6 +4,7 @@ import { useRoute, RouterLink } from 'vue-router'
 import { posts } from '@/data/posts.js'
 import { supabase } from '@/lib/supabase.js'
 import CommentItem from '@/components/CommentItem.vue'
+import { useHead } from '@unhead/vue'
 import { useLang } from '@/composables/useLang.js'
 
 const route = useRoute()
@@ -11,6 +12,29 @@ const route = useRoute()
 const { lang, toggle, t } = useLang()
 
 const post = computed(() => posts.find((p) => p.slug === route.params.slug))
+
+useHead({
+  title: computed(() => {
+    if (!post.value) return t('Article introuvable', 'Post not found')
+    return `${lang.value === 'fr' ? post.value.title : post.value.titleEn} — Gabriel Gingras`
+  }),
+  meta: [
+    { name: 'description', content: computed(() => {
+      if (!post.value) return ''
+      return lang.value === 'fr' ? post.value.summary : post.value.summaryEn
+    }) },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:title', content: computed(() => {
+      if (!post.value) return ''
+      return lang.value === 'fr' ? post.value.title : post.value.titleEn
+    }) },
+    { property: 'og:description', content: computed(() => {
+      if (!post.value) return ''
+      return lang.value === 'fr' ? post.value.summary : post.value.summaryEn
+    }) },
+    { property: 'og:url', content: computed(() => `https://gabrielgingras.me/blog/${route.params.slug}`) },
+  ],
+})
 
 const formatDate = (dateStr) => {
   const date = new Date(dateStr + 'T00:00:00')
