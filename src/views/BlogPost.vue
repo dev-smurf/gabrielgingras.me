@@ -4,12 +4,11 @@ import { useRoute, RouterLink } from 'vue-router'
 import { posts } from '@/data/posts.js'
 import { supabase } from '@/lib/supabase.js'
 import CommentItem from '@/components/CommentItem.vue'
+import { useLang } from '@/composables/useLang.js'
 
 const route = useRoute()
 
-const lang = ref('fr')
-const toggle = () => { lang.value = lang.value === 'fr' ? 'en' : 'fr' }
-const t = (fr, en) => lang.value === 'fr' ? fr : en
+const { lang, toggle, t } = useLang()
 
 const post = computed(() => posts.find((p) => p.slug === route.params.slug))
 

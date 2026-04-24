@@ -1,11 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useLang } from '@/composables/useLang.js'
 
-const lang = ref('fr')
-const toggle = () => { lang.value = lang.value === 'fr' ? 'en' : 'fr' }
-
-const t = (fr, en) => lang.value === 'fr' ? fr : en
+const { lang, toggle, t } = useLang()
 
 const openEntry = ref(null)
 const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : id }

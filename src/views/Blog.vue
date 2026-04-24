@@ -1,11 +1,13 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { posts } from '@/data/posts.js'
+import { supabase } from '@/lib/supabase.js'
+import { useLang } from '@/composables/useLang.js'
 
-const lang = ref('fr')
-const toggle = () => { lang.value = lang.value === 'fr' ? 'en' : 'fr' }
-const t = (fr, en) => lang.value === 'fr' ? fr : en
+const { lang, toggle, t } = useLang()
+
+const commentCounts = ref({})
 
 const formatDate = (dateStr) => {
   const date = new Date(dateStr + 'T00:00:00')
@@ -15,6 +17,26 @@ const formatDate = (dateStr) => {
     day: 'numeric',
   })
 }
+
+const fetchCommentCounts = async () => {
+  try {
+    const slugs = posts.map((p) => p.slug)
+    const { data, error } = await supabase
+      .from('comments')
+      .select('slug')
+      .in('slug', slugs)
+    if (error) throw error
+    const counts = {}
+    for (const row of data) {
+      counts[row.slug] = (counts[row.slug] || 0) + 1
+    }
+    commentCounts.value = counts
+  } catch {
+    commentCounts.value = {}
+  }
+}
+
+onMounted(fetchCommentCounts)
 </script>
 
 <template>
@@ -48,7 +70,13 @@ const formatDate = (dateStr) => {
               <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
             </span>
           </div>
-          <span class="post-date">{{ formatDate(post.date) }}</span>
+          <div class="post-meta">
+            <span class="post-date">{{ formatDate(post.date) }}</span>
+            <span v-if="commentCounts[post.slug]" class="post-comments">
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              {{ commentCounts[post.slug] }}
+            </span>
+          </div>
           <p class="post-summary">{{ lang === 'fr' ? post.summary : post.summaryEn }}</p>
           <div class="post-tags">
             <span v-for="tag in post.tags" :key="tag" class="post-tag">{{ tag }}</span>
@@ -202,12 +230,30 @@ const formatDate = (dateStr) => {
   transform: translate(2px, -2px);
 }
 
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
 .post-date {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.62rem;
   color: #9a8b7a;
+}
+
+.post-comments {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: #9a8b7a;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.post-comments svg {
   display: block;
-  margin-top: 0.35rem;
 }
 
 .post-summary {
