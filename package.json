@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.104.0",
+    "dompurify": "^3.4.1",
     "marked": "^18.0.2",
     "vue": "^3.5.33",
     "vue-router": "^4.6.3"

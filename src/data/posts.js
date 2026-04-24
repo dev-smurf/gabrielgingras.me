@@ -1,4 +1,5 @@
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 const modules = import.meta.glob('/src/content/blog/**/*.md', {
   eager: true,
@@ -47,8 +48,8 @@ export const posts = Object.entries(modules)
       summary: meta.description || '',
       summaryEn: meta.descriptionEn || meta.description || '',
       tags: Array.isArray(meta.tags) ? meta.tags : [],
-      content: marked(fr),
-      contentEn: marked(en),
+      content: DOMPurify.sanitize(marked(fr)),
+      contentEn: DOMPurify.sanitize(marked(en)),
     }
   })
   .sort((a, b) => b.date.localeCompare(a.date))

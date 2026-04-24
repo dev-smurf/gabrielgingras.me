@@ -81,6 +81,7 @@ const checkCooldown = () => {
 
 const submitComment = async () => {
   if (honeypot.value) return
+  if (!post.value) return
   const name = commentName.value.trim()
   const content = commentContent.value.trim()
   if (!name || !content) return
@@ -106,6 +107,7 @@ const submitComment = async () => {
 
 const submitReply = async (parentId) => {
   if (honeypot.value) return
+  if (!post.value) return
   const name = replyName.value.trim()
   const content = replyContent.value.trim()
   if (!name || !content) return
