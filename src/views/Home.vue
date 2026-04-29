@@ -186,6 +186,20 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
             <span class="project-tech">typescript · mcp · websocket</span>
           </a>
 
+          <a href="https://github.com/dev-smurf/excaliclaude" target="_blank" rel="noopener" class="project-card">
+            <div class="project-card-top">
+              <img src="/logo-excaliclaude.svg" alt="" class="project-logo">
+              <strong>excaliclaude</strong>
+              <span class="project-date">2026</span>
+              <span class="project-arrow"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+            </div>
+            <p>{{ t(
+              "Serveur MCP qui permet à Claude de dessiner sur un canvas Excalidraw en temps réel. Chiffrement E2E, protocole natif.",
+              "MCP server that lets Claude draw on an Excalidraw canvas in real-time. E2E encrypted, native protocol."
+            ) }}</p>
+            <span class="project-tech">typescript · mcp · socket.io</span>
+          </a>
+
           <a href="https://homard.cloud" target="_blank" rel="noopener" class="project-card">
             <div class="project-card-top">
               <img src="/logo-homard.png" alt="" class="project-logo">
@@ -240,20 +254,6 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
               "Headless e-commerce site with Shopify API. Minimalist design, custom experience."
             ) }}</p>
             <span class="project-tech">vue · shopify · tailwind</span>
-          </a>
-
-          <a href="https://github.com/dev-smurf/excaliclaude" target="_blank" rel="noopener" class="project-card">
-            <div class="project-card-top">
-              <img src="/logo-excaliclaude.svg" alt="" class="project-logo">
-              <strong>excaliclaude</strong>
-              <span class="project-date">2026</span>
-              <span class="project-arrow"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
-            </div>
-            <p>{{ t(
-              "Serveur MCP qui permet à Claude de dessiner sur un canvas Excalidraw en temps réel. Chiffrement E2E, protocole natif.",
-              "MCP server that lets Claude draw on an Excalidraw canvas in real-time. E2E encrypted, native protocol."
-            ) }}</p>
-            <span class="project-tech">typescript · mcp · socket.io</span>
           </a>
         </div>
       </section>
