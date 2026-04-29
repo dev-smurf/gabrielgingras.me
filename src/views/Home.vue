@@ -172,6 +172,20 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
         <h2 class="section-label">{{ t('Projets', 'Projects') }}</h2>
 
         <div class="projects-grid">
+          <a href="https://github.com/dev-smurf/claude-hive-mind" target="_blank" rel="noopener" class="project-card">
+            <div class="project-card-top">
+              <img src="/logo-claude-hive-mind.svg" alt="" class="project-logo">
+              <strong>Claude Hive Mind</strong>
+              <span class="project-date">2026</span>
+              <span class="project-arrow"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+            </div>
+            <p>{{ t(
+              "Couche de coordination temps réel pour assistants de code IA travaillant sur le même repo : registres d'agents, claims de fichiers, file de tâches, messages, décisions et dashboard live.",
+              "Real-time coordination layer for AI coding assistants working on the same repo: agent registry, file claims, task queue, messages, decisions, and a live dashboard."
+            ) }}</p>
+            <span class="project-tech">typescript · mcp · websocket</span>
+          </a>
+
           <a href="https://homard.cloud" target="_blank" rel="noopener" class="project-card">
             <div class="project-card-top">
               <img src="/logo-homard.png" alt="" class="project-logo">
