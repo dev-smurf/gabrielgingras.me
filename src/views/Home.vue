@@ -246,7 +246,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
             <div class="project-card-top">
               <img src="/logo-excaliclaude.svg" alt="" class="project-logo">
               <strong>excaliclaude</strong>
-              <span class="project-date">2025</span>
+              <span class="project-date">2026</span>
               <span class="project-arrow"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
             </div>
             <p>{{ t(
