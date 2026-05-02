@@ -54,14 +54,10 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
         </p>
 
         <p>
-          {{ t(
-            "En ce moment, je suis analyste et développeur au",
-            "Currently, I'm an analyst and developer at the"
-          ) }}
-          <strong>{{ t("Ministère de la Cybersécurité et du Numérique", "Ministère de la Cybersécurité et du Numérique") }}</strong>
-          {{ t(
-            "du gouvernement du Québec, où je développe des outils internes en Python et j'automatise tout ce qui peut l'être. En parallèle, je finis mon DEC en informatique au Cégep Garneau.",
-            "(Quebec government), where I build internal tools in Python and automate everything I can. I'm also finishing my CS degree at Cégep Garneau."
+          {{ t("En ce moment, je travaille chez", "Currently, I'm at") }}
+          <strong>C-CUBE</strong>{{ t(
+            ", où j'intègre l'IA et les agents autonomes au cœur des opérations de l'entreprise. En parallèle, je finis mon DEC en informatique au Cégep Garneau.",
+            ", where I integrate AI and autonomous agents into the core of the company's operations. I'm also finishing my CS degree at Cégep Garneau."
           ) }}
         </p>
 
@@ -106,6 +102,31 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
       <section class="section fade" style="--d: 2">
         <h2 class="section-label">{{ t('Expérience', 'Experience') }}</h2>
 
+        <div class="entry entry-collapsible" :class="{ open: openEntry === 'ccube' }" @click="toggleEntry('ccube')">
+          <div class="entry-header">
+            <div class="entry-title-row">
+              <img src="/logo-ccube.svg" alt="" class="entry-logo">
+              <div>
+                <strong>C-CUBE</strong>
+                <span class="entry-role">{{ t('Intégrateur IA & Agents', 'AI & Agents Integrator') }}</span>
+              </div>
+            </div>
+            <span class="entry-date">{{ t('Mai 2026 — Présent', 'May 2026 — Present') }}</span>
+          </div>
+          <div class="entry-details">
+            <ul class="entry-list">
+              <li>{{ t(
+                "Intégration de l'IA et d'agents autonomes au cœur des opérations de l'entreprise.",
+                "Integrating AI and autonomous agents at the core of the company's operations."
+              ) }}</li>
+              <li>{{ t(
+                "Conception et déploiement d'agents pour automatiser les workflows internes et augmenter la productivité des équipes.",
+                "Designing and deploying agents to automate internal workflows and boost team productivity."
+              ) }}</li>
+            </ul>
+          </div>
+        </div>
+
         <div class="entry entry-collapsible" :class="{ open: openEntry === 'backdoor' }" @click="toggleEntry('backdoor')">
           <div class="entry-header">
             <div class="entry-title-row">
@@ -115,7 +136,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
                 <span class="entry-role">{{ t('Fondateur', 'Founder') }}</span>
               </div>
             </div>
-            <span class="entry-date">2025 — {{ t('Présent', 'Present') }}</span>
+            <span class="entry-date">{{ t('Mai 2025 — Présent', 'May 2025 — Present') }}</span>
           </div>
           <div class="entry-details">
             <ul class="entry-list">
@@ -148,7 +169,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
                 <span class="entry-role">{{ t('Analyste et développeur', 'Analyst & Developer') }}</span>
               </div>
             </div>
-            <span class="entry-date">2023 — {{ t('Présent', 'Present') }}</span>
+            <span class="entry-date">{{ t('Juin 2023 — Mai 2026', 'Jun. 2023 — May 2026') }}</span>
           </div>
           <div class="entry-details">
             <ul class="entry-list">
