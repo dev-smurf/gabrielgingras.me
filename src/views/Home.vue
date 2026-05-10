@@ -76,24 +76,6 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
           ) }}
         </p>
 
-        <a href="https://tokscale.ai/u/dev-smurf" target="_blank" rel="noopener" class="tokscale-card">
-          <img src="/logo-claude.svg" alt="" class="tokscale-claude">
-          <div class="tokscale-stat">
-            <span class="tokscale-value">6.1B</span>
-            <span class="tokscale-label">tokens</span>
-          </div>
-          <div class="tokscale-sep"></div>
-          <div class="tokscale-stat">
-            <span class="tokscale-value">$3,457</span>
-            <span class="tokscale-label">{{ t('dépensés', 'spent') }}</span>
-          </div>
-          <div class="tokscale-sep"></div>
-          <div class="tokscale-stat">
-            <span class="tokscale-value">88</span>
-            <span class="tokscale-label">{{ t('jours actifs', 'active days') }}</span>
-          </div>
-          <span class="tokscale-badge">tokscale.ai <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
-        </a>
       </section>
 
       <hr class="sep fade" style="--d: 2">
@@ -512,7 +494,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
   color: #1e1812;
 }
 
-.bio a:not(.tokscale-card) {
+.bio a {
   color: #c45d31;
   text-decoration: none;
   background-image: linear-gradient(#c45d31, #c45d31);
@@ -522,74 +504,8 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
   transition: background-size 0.3s ease;
 }
 
-.bio a:not(.tokscale-card):hover {
+.bio a:hover {
   background-size: 100% 1px;
-}
-
-/* ── Tokscale card ── */
-.tokscale-card {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  background: #efe3d2;
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  text-decoration: none;
-  color: #2c2418;
-  margin-top: 0.25rem;
-}
-
-.tokscale-claude {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  flex-shrink: 0;
-}
-
-.tokscale-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-}
-
-.tokscale-value {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: #1e1812;
-  line-height: 1;
-}
-
-.tokscale-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  color: #9a8b7a;
-  letter-spacing: 0.05em;
-}
-
-.tokscale-sep {
-  width: 1px;
-  height: 28px;
-  background: #ddd0c0;
-}
-
-.tokscale-badge {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  color: #c45d31;
-  margin-left: auto;
-  letter-spacing: 0.02em;
-}
-
-@media (max-width: 480px) {
-  .tokscale-card {
-    gap: 0.9rem;
-    padding: 0.85rem 1rem;
-  }
-
-  .tokscale-value {
-    font-size: 1.1rem;
-  }
 }
 
 /* ── Separator ── */
