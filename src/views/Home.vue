@@ -328,7 +328,7 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
               <strong>{{ t('Participation, Défi OSEntreprendre', 'Participation, OSEntreprendre Challenge') }}</strong>
               <span class="entry-role">{{ t('Volet entrepreneuriat étudiant', 'Student entrepreneurship track') }}</span>
             </div>
-            <span class="entry-date">2025</span>
+            <span class="entry-date">2026</span>
           </div>
           <div class="entry-dist-links">
             <a href="https://www.osentreprendre.quebec/defi-osentreprendre/volet/etudiant/" target="_blank" rel="noopener">osentreprendre.quebec <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
