@@ -54,10 +54,10 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
         </p>
 
         <p>
-          {{ t("En ce moment, je travaille chez", "Currently, I'm at") }}
-          <strong>C-CUBE</strong>{{ t(
-            ", où j'intègre l'IA et les agents autonomes au cœur des opérations de l'entreprise. En parallèle, je finis mon DEC en informatique au Cégep Garneau.",
-            ", where I integrate AI and autonomous agents into the core of the company's operations. I'm also finishing my CS degree at Cégep Garneau."
+          {{ t("En ce moment, je suis", "Currently, I'm") }}
+          <strong>Co-Founder & CTO {{ t('chez Astrale', 'at Astrale') }}</strong>{{ t(
+            ", où je pilote le développement technique : agents IA, sites web, architecture technique, choix technologiques, développement produit et exécution technique des projets clients.",
+            ", where I lead the technical side: AI agents, websites, technical architecture, technology choices, product development and technical execution for client projects."
           ) }}
         </p>
 
@@ -83,6 +83,34 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
       <!-- Experience -->
       <section class="section fade" style="--d: 2">
         <h2 class="section-label">{{ t('Expérience', 'Experience') }}</h2>
+
+        <div class="entry entry-collapsible" :class="{ open: openEntry === 'astrale' }" @click="toggleEntry('astrale')">
+          <div class="entry-header">
+            <div class="entry-title-row">
+              <img src="/logo-astrale.png" alt="" class="entry-logo">
+              <div>
+                <strong>Astrale</strong>
+                <span class="entry-role">Co-Founder & CTO</span>
+              </div>
+            </div>
+            <span class="entry-date">{{ t('Mai 2026 — Présent', 'May 2026 — Present') }}</span>
+          </div>
+          <div class="entry-details">
+            <ul class="entry-list">
+              <li>{{ t(
+                "Responsable du développement technique : agents IA, sites web, architecture technique et choix technologiques.",
+                "Leading technical development across AI agents, websites, technical architecture and technology choices."
+              ) }}</li>
+              <li>{{ t(
+                "Pilotage du développement produit et de l'exécution technique des projets clients.",
+                "Driving product development and technical execution for client projects."
+              ) }}</li>
+            </ul>
+            <div class="entry-links" @click.stop>
+              <a href="https://astrale.ca" target="_blank" rel="noopener">Site <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+            </div>
+          </div>
+        </div>
 
         <div class="entry entry-collapsible" :class="{ open: openEntry === 'ccube' }" @click="toggleEntry('ccube')">
           <div class="entry-header">
@@ -550,17 +578,13 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
 }
 
 .entry-collapsible .entry-details {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease;
-}
-
-.entry-collapsible .entry-details > * {
+  max-height: 0;
   overflow: hidden;
+  transition: max-height 0.3s ease;
 }
 
 .entry-collapsible.open .entry-details {
-  grid-template-rows: 1fr;
+  max-height: 16rem;
 }
 
 .entry-collapsible .entry-details p,
