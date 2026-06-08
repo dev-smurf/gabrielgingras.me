@@ -325,6 +325,20 @@ const toggleEntry = (id) => { openEntry.value = openEntry.value === id ? null : 
         <div class="entry">
           <div class="entry-header">
             <div>
+              <strong>{{ t('1re place, MPC Hacks', '1st place, MPC Hacks') }}</strong>
+              <span class="entry-role">{{ t('Dialogue FastCare, hackathon Major League Hacking sponsorisé par Dialogue', 'Dialogue FastCare, Major League Hacking hackathon sponsored by Dialogue') }}</span>
+            </div>
+            <span class="entry-date">{{ t('Mai 2026', 'May 2026') }}</span>
+          </div>
+          <div class="entry-dist-links">
+            <a href="https://devpost.com/software/dialogue-fastcare" target="_blank" rel="noopener">Devpost <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7469468484251586560/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEg6ePYB8m-bb5mRpBZsCzV2BDg_e99vuZI" target="_blank" rel="noopener">Post <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <div>
               <strong>{{ t('Participation, Botpress ADK Contest', 'Participation, Botpress ADK Contest') }}</strong>
               <span class="entry-role">{{ t('Concours #BotpressADK', '#BotpressADK Competition') }}</span>
             </div>
