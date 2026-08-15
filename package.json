@@ -19,7 +19,7 @@
     "dompurify": "^3.4.1",
     "marked": "^18.0.2",
     "vue": "^3.5.33",
-    "vue-router": "^4.6.3"
+    "vue-router": "^5.0.6"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.17",
